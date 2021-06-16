@@ -21,12 +21,12 @@ describe(LikeWidgeComponent.name, () => {
     expect(component).toBeTruthy();
   });
 
-  it('Should auto generate ID when id input property is missing', () => {
+  it('Should auto-generate ID during ngOnInit when (@Input id) is not assigned', () => {
     fixture.detectChanges();
     expect(component.id).toBeTruthy();
   });
 
-  it('Should NOT generate ID when id input property is present', () => {
+  it('Should NOT auto-generate ID during ngOnInit when (@Input id) is assigned', () => {
     const someId = 'someId';
     component.id = someId;
     fixture.detectChanges();
@@ -34,12 +34,10 @@ describe(LikeWidgeComponent.name, () => {
   });
 
   it(`#${LikeWidgeComponent.prototype.like.name}
-    should trigger emission when called`, done => {
+    should trigger (@Output liked) when called`, () => {
+      spyOn(component.liked, 'emit');
       fixture.detectChanges();
-      component.liked.subscribe(() => {
-        expect(true).toBeTrue();
-        done();
-      });
       component.like();
+      expect(component.liked.emit).toHaveBeenCalled();
   })
 });
