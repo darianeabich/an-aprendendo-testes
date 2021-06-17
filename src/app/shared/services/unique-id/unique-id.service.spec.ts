@@ -19,8 +19,8 @@ describe('UniqueIdService', () => {
   // não deixar o que o id seja duplicado
   it(`#${UniqueIdService.prototype.generateUniqueIdWithPrefix.name}
     should not generate duplicate IDs when called multiple times`, () => {
-    const ids  = new Set(); // Set() não aceita strings duplicadas, ignora adição
-    for (let i = 0; i < 50; i++){
+    const ids = new Set(); // Set() não aceita strings duplicadas, ignora adição
+    for (let i = 0; i < 50; i++) {
       ids.add(service.generateUniqueIdWithPrefix('app')); // adiciona os elementos
     }
     expect(ids.size).toBe(50); // espera-se que sejam 50 elementos, caso não deu errado, algum dado foi duplicado
@@ -31,16 +31,16 @@ describe('UniqueIdService', () => {
     service.generateUniqueIdWithPrefix('app');
     service.generateUniqueIdWithPrefix('app');
     expect(service.getNumberOfGeneratedUniqueIds()).toBe(2);
-  })
+  });
 
   it(`#${UniqueIdService.prototype.generateUniqueIdWithPrefix.name}
     should throw when called with empty`, () => {
-      const emptyValues = [null, undefined, '', '0', '1'];
-      emptyValues.forEach(emptyValue => {
-        expect(() => service.generateUniqueIdWithPrefix(emptyValue))
-          .withContext(`Empty value: ${emptyValue}`)
-          .toThrow();
-      })
+    const emptyValues = [null, undefined, '', '0', '1'];
+    emptyValues.forEach(emptyValue => {
+      expect(() => service.generateUniqueIdWithPrefix(emptyValue))
+        .withContext(`Empty value: ${emptyValue}`)
+        .toThrow();
     })
+  })
 });
 
